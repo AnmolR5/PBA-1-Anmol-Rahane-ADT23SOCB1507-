@@ -1,5 +1,5 @@
 {
-  "name": "AIOps Architect Pro",
-  "description": "A comprehensive design and visualization tool for production-grade AIOps systems on Google Cloud, featuring real-time monitoring, predictive analytics, and automated incident resolution workflows.",
+  "name": "AIOps Architect Pro v2.0",
+  "description": "The next generation of AIOps system design. Featuring real-time monitoring simulations, enhanced MLOps visualizations, and advanced automated resolution workflows for enterprise-scale cloud environments.",
   "requestFramePermissions": []
 }

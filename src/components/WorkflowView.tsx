@@ -9,7 +9,8 @@ import {
   MessageSquare,
   Zap,
   Terminal,
-  Clock
+  Clock,
+  Workflow
 } from 'lucide-react';
 
 const STEPS = [
@@ -65,39 +66,51 @@ export default function WorkflowView() {
 
   return (
     <div className="space-y-12">
-      <header className="border-b border-[#141414] pb-8">
-        <h2 className="text-5xl font-serif italic mb-4">Incident Workflow</h2>
-        <p className="text-lg opacity-70 max-w-2xl">
-          Real-world simulation of the AIOps system detecting, diagnosing, and resolving a critical infrastructure failure.
-        </p>
+      <header className="flex justify-between items-end border-b border-[#141414]/5 pb-8">
+        <div>
+          <div className="flex items-center gap-2 mb-2">
+            <Workflow className="w-4 h-4 opacity-50" />
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] opacity-50">Automated Resolution</span>
+          </div>
+          <h2 className="text-5xl font-serif italic">Incident Workflow</h2>
+        </div>
+        <div className="text-right">
+          <p className="text-[10px] font-mono uppercase tracking-widest opacity-40 mb-1">MTTR Target</p>
+          <p className="text-xl font-serif italic text-emerald-600">{'<'} 5.0m</p>
+        </div>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Timeline */}
-        <div className="lg:col-span-4 space-y-4">
+        <div className="lg:col-span-4 space-y-3">
           {STEPS.map((step, idx) => (
-            <div 
+            <motion.div 
               key={step.id}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.1 }}
               onClick={() => setCurrentStep(idx)}
-              className={`p-6 border transition-all cursor-pointer relative ${
+              className={`p-6 rounded-2xl border transition-all cursor-pointer relative group ${
                 currentStep === idx 
-                  ? 'border-[#141414] bg-white shadow-[8px_8px_0px_0px_rgba(20,20,20,1)]' 
-                  : 'border-[#141414]/10 hover:border-[#141414]/30'
+                  ? 'border-[#141414] bg-white shadow-xl' 
+                  : 'border-[#141414]/5 bg-white/50 hover:bg-white hover:border-[#141414]/20'
               }`}
             >
-              <div className="flex items-center gap-4">
-                <div className={`p-2 rounded-full ${currentStep === idx ? step.bg : 'bg-gray-100'} ${currentStep === idx ? step.color : 'text-gray-400'}`}>
+              <div className="flex items-center gap-5">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                  currentStep === idx ? step.bg + ' ' + step.color : 'bg-[#F5F5F0] text-[#141414]/30 group-hover:text-[#141414]'
+                }`}>
                   <step.icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className={`font-bold text-sm ${currentStep === idx ? 'opacity-100' : 'opacity-40'}`}>{step.title}</h4>
-                  <p className="text-[10px] font-mono uppercase tracking-widest opacity-40">Step 0{idx + 1}</p>
+                  <h4 className={`font-bold text-sm tracking-tight ${currentStep === idx ? 'opacity-100' : 'opacity-40'}`}>{step.title}</h4>
+                  <p className="text-[9px] font-mono uppercase tracking-widest opacity-30">Phase 0{idx + 1}</p>
                 </div>
               </div>
               {idx < STEPS.length - 1 && (
-                <div className="absolute -bottom-4 left-10 w-[1px] h-4 bg-[#141414]/10" />
+                <div className="absolute -bottom-3 left-11 w-[1px] h-3 bg-[#141414]/10" />
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -106,55 +119,66 @@ export default function WorkflowView() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStep}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="border border-[#141414] bg-white h-full flex flex-col"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              className="bg-white border border-[#141414]/5 rounded-[32px] shadow-2xl h-full flex flex-col overflow-hidden"
             >
               <div className="p-12 flex-1">
                 <div className="flex items-center justify-between mb-12">
-                  <div className={`px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${STEPS[currentStep].bg} ${STEPS[currentStep].color}`}>
-                    Active Phase
+                  <div className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${STEPS[currentStep].bg} ${STEPS[currentStep].color}`}>
+                    Active Simulation
                   </div>
-                  <div className="flex items-center gap-2 text-xs font-mono opacity-50">
-                    <Clock className="w-3 h-3" />
+                  <div className="flex items-center gap-2 text-[10px] font-mono opacity-40">
+                    <Clock className="w-3.5 h-3.5" />
                     T + {currentStep * 60}s
                   </div>
                 </div>
 
-                <h3 className="text-4xl font-serif italic mb-6">{STEPS[currentStep].title}</h3>
-                <p className="text-xl leading-relaxed mb-8">{STEPS[currentStep].description}</p>
+                <h3 className="text-5xl font-serif italic mb-8">{STEPS[currentStep].title}</h3>
+                <p className="text-2xl leading-relaxed mb-10 opacity-80">{STEPS[currentStep].description}</p>
                 
-                <div className="bg-[#141414] p-8 text-[#E4E3E0] font-mono text-sm space-y-4">
-                  <div className="flex items-center gap-2 opacity-50 border-b border-white/10 pb-2 mb-4">
+                <div className="bg-[#141414] p-10 rounded-2xl text-white font-mono text-sm space-y-5 shadow-inner">
+                  <div className="flex items-center gap-3 opacity-30 border-b border-white/10 pb-4 mb-2">
                     <Terminal className="w-4 h-4" />
-                    <span>System Logs</span>
+                    <span className="uppercase tracking-[0.2em] text-[10px]">Kernel Telemetry Stream</span>
                   </div>
-                  <p className="text-emerald-400">{'>'} {STEPS[currentStep].details}</p>
-                  <p className="opacity-50">{'>'} Analyzing telemetry stream from us-central1-a...</p>
-                  <p className="opacity-50">{'>'} Correlation engine matched pattern with 'ConfigChange_v1'</p>
+                  <div className="space-y-2">
+                    <p className="text-emerald-400 flex gap-3">
+                      <span className="opacity-30">01:42:04</span>
+                      <span>{'>'} {STEPS[currentStep].details}</span>
+                    </p>
+                    <p className="opacity-40 flex gap-3">
+                      <span className="opacity-30">01:42:05</span>
+                      <span>{'>'} Analyzing telemetry stream from us-central1-a...</span>
+                    </p>
+                    <p className="opacity-40 flex gap-3">
+                      <span className="opacity-30">01:42:07</span>
+                      <span>{'>'} Correlation engine matched pattern with 'ConfigChange_v1'</span>
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="p-8 border-t border-[#141414] bg-[#E4E3E0] flex justify-between items-center">
+              <div className="p-10 border-t border-[#141414]/5 bg-[#F5F5F0]/50 flex justify-between items-center">
                 <button 
                   disabled={currentStep === 0}
                   onClick={() => setCurrentStep(prev => prev - 1)}
-                  className="px-6 py-2 font-bold text-sm uppercase tracking-widest disabled:opacity-20"
+                  className="px-8 py-3 font-bold text-[10px] uppercase tracking-widest disabled:opacity-20 hover:bg-[#141414]/5 rounded-lg transition-colors"
                 >
                   Previous
                 </button>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   {STEPS.map((_, i) => (
-                    <div key={i} className={`w-2 h-2 rounded-full ${i === currentStep ? 'bg-[#141414]' : 'bg-[#141414]/20'}`} />
+                    <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentStep ? 'bg-[#141414] w-4' : 'bg-[#141414]/10'}`} />
                   ))}
                 </div>
                 <button 
                   disabled={currentStep === STEPS.length - 1}
                   onClick={() => setCurrentStep(prev => prev + 1)}
-                  className="flex items-center gap-2 px-6 py-2 bg-[#141414] text-[#E4E3E0] font-bold text-sm uppercase tracking-widest hover:bg-[#141414]/90 disabled:opacity-20"
+                  className="flex items-center gap-3 px-8 py-3 bg-[#141414] text-white font-bold text-[10px] uppercase tracking-widest hover:bg-[#141414]/90 disabled:opacity-20 rounded-lg shadow-lg shadow-[#141414]/10"
                 >
-                  Next Step <ArrowRight className="w-4 h-4" />
+                  Next Phase <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </motion.div>
