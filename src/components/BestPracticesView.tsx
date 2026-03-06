@@ -39,7 +39,7 @@ export default function BestPracticesView() {
         <div>
           <div className="flex items-center gap-3 mb-2">
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-emerald-400">Operational Standards v3.0</span>
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-emerald-400">Operational Standards v4.0</span>
           </div>
           <h2 className="text-5xl font-serif italic text-white">Quantum Protocols</h2>
         </div>

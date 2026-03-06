@@ -54,7 +54,9 @@ const LOG_MESSAGES = [
   "Security scan complete: 0 vulnerabilities",
   "Model 'Evolution-v4' weights synchronized",
   "Latency spike detected: us-west-2 (RESOLVED)",
-  "Autonomous scaling: +4 nodes in cluster-A"
+  "Autonomous scaling: +4 nodes in cluster-A",
+  "Core v4.0 neural engine online",
+  "Quantum encryption layer 4 active"
 ];
 
 export default function LiveDashboardView() {
@@ -125,7 +127,7 @@ export default function LiveDashboardView() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="bg-[#121216] p-6 rounded-xl border border-white/5 relative overflow-hidden group hover:border-white/20 transition-all"
+            className="bg-[#1E293B]/50 backdrop-blur-sm p-6 rounded-xl border border-white/5 relative overflow-hidden group hover:border-white/20 transition-all"
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rotate-45 translate-x-12 translate-y-[-12px] group-hover:bg-white/10 transition-colors" />
             <div className="flex justify-between items-start mb-4 relative z-10">
@@ -146,7 +148,7 @@ export default function LiveDashboardView() {
       {/* Main Dashboard Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 flex-1">
         {/* Primary Chart */}
-        <div className="lg:col-span-8 bg-[#121216] p-8 rounded-2xl border border-white/5 flex flex-col relative overflow-hidden">
+        <div className="lg:col-span-8 bg-[#1E293B]/50 backdrop-blur-sm p-8 rounded-2xl border border-white/5 flex flex-col relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500/50 via-blue-500/50 to-emerald-500/50 opacity-20" />
           <div className="flex justify-between items-center mb-10">
             <div>
@@ -221,7 +223,7 @@ export default function LiveDashboardView() {
         {/* Terminal & Insights */}
         <div className="lg:col-span-4 space-y-6 flex flex-col">
           {/* Real-time Terminal */}
-          <div className="bg-[#0A0A0C] border border-white/5 rounded-2xl flex-1 flex flex-col overflow-hidden font-mono shadow-2xl">
+          <div className="bg-[#020617] border border-white/5 rounded-2xl flex-1 flex flex-col overflow-hidden font-mono shadow-2xl">
             <div className="bg-white/5 px-4 py-3 border-b border-white/5 flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <Terminal className="w-3.5 h-3.5 text-emerald-400" />
@@ -253,7 +255,7 @@ export default function LiveDashboardView() {
           </div>
 
           {/* AI Status Card */}
-          <div className="bg-gradient-to-br from-[#1A1A1E] to-[#121216] p-8 rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden">
+          <div className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-8 rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-10">
               <Cpu className="w-24 h-24" />
             </div>

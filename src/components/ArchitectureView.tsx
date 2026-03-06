@@ -63,7 +63,7 @@ export default function ArchitectureView() {
         <div>
           <div className="flex items-center gap-3 mb-2">
             <Network className="w-4 h-4 text-emerald-400" />
-            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-emerald-400">System Topology v3.0</span>
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-emerald-400">System Topology v4.0</span>
           </div>
           <h2 className="text-5xl font-serif italic text-white">Neural Topology</h2>
         </div>

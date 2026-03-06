@@ -43,29 +43,29 @@ export default function App() {
   ];
 
   return (
-    <div className="flex h-screen bg-[#0A0A0B] text-[#E0E0E0] font-sans overflow-hidden selection:bg-emerald-500/30">
+    <div className="flex h-screen bg-[#0F172A] text-[#E0E0E0] font-sans overflow-hidden selection:bg-emerald-500/30">
       {/* Immersive Background Elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full animate-pulse delay-1000" />
-        <div className="absolute inset-0 opacity-[0.03]" 
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 blur-[120px] rounded-full animate-pulse delay-1000" />
+        <div className="absolute inset-0 opacity-[0.05]" 
              style={{ backgroundImage: 'linear-gradient(#E0E0E0 1px, transparent 1px), linear-gradient(90deg, #E0E0E0 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       </div>
 
       {/* Sidebar - Hardware Style */}
-      <aside className="w-72 border-r border-white/5 flex flex-col bg-[#0F0F11]/80 backdrop-blur-xl z-20">
+      <aside className="w-72 border-r border-white/5 flex flex-col bg-[#020617]/80 backdrop-blur-xl z-20">
         <div className="p-8 border-b border-white/5">
           <div className="flex items-center gap-3 mb-4">
             <div className="relative">
               <div className="absolute inset-0 bg-emerald-500/20 blur-md rounded-full animate-pulse" />
-              <div className="relative p-2 bg-[#1A1A1E] border border-white/10 rounded-lg">
+              <div className="relative p-2 bg-[#1E293B] border border-white/10 rounded-lg">
                 <Radio className="w-5 h-5 text-emerald-400" />
               </div>
             </div>
             <div>
               <h1 className="font-serif italic text-xl font-bold tracking-tight text-white">Autonomous Core</h1>
               <div className="flex items-center gap-2">
-                <span className="text-[9px] uppercase tracking-[0.2em] text-emerald-400 font-mono">Quantum v3.0</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-emerald-400 font-mono">Quantum v4.0</span>
               </div>
             </div>
           </div>
@@ -127,15 +127,39 @@ export default function App() {
       </aside>
 
       {/* Main Content - Atmospheric */}
-      <main className="flex-1 overflow-y-auto relative bg-[#0A0A0B]">
+      <main className="flex-1 overflow-y-auto relative bg-[#0F172A]">
+        {/* Top Header Bar */}
+        <header className="sticky top-0 z-30 bg-[#0F172A]/80 backdrop-blur-md border-b border-white/5 px-12 py-6 flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <div className="p-2.5 bg-emerald-500/10 rounded-xl border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+              <Cpu className="w-6 h-6 text-emerald-400" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold tracking-tight text-white">AIOps Autonomous Core <span className="text-emerald-400 ml-2 font-mono text-sm align-top">v4.0</span></h2>
+              <p className="text-[10px] text-white/40 uppercase tracking-[0.3em] font-medium">Neural Intelligence Command Center</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-3 px-4 py-2 bg-white/5 rounded-full border border-white/5">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+              <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest">System Stable</span>
+            </div>
+            <div className="h-8 w-px bg-white/10" />
+            <div className="text-right">
+              <p className="text-[9px] text-white/40 uppercase tracking-widest mb-0.5">Global Latency</p>
+              <p className="text-xs font-mono text-white">12ms <span className="text-emerald-400 text-[10px]">▼ 2%</span></p>
+            </div>
+          </div>
+        </header>
+
         <AnimatePresence mode="wait">
           <motion.div
             key={activeView}
-            initial={{ opacity: 0, filter: 'blur(10px)', scale: 1.02 }}
-            animate={{ opacity: 1, filter: 'blur(0px)', scale: 1 }}
-            exit={{ opacity: 0, filter: 'blur(10px)', scale: 0.98 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="p-12 max-w-7xl mx-auto min-h-full flex flex-col relative z-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="p-12 max-w-7xl mx-auto min-h-[calc(100vh-88px)] flex flex-col relative z-10"
           >
             {activeView === 'dashboard' && <LiveDashboardView />}
             {activeView === 'architecture' && <ArchitectureView />}
