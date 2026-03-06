@@ -43,43 +43,43 @@ export default function App() {
   ];
 
   return (
-    <div className="flex h-screen bg-[#0F172A] text-[#E0E0E0] font-sans overflow-hidden selection:bg-emerald-500/30">
-      {/* Immersive Background Elements */}
+    <div className="flex h-screen bg-white text-slate-900 font-sans overflow-hidden selection:bg-emerald-100">
+      {/* Refined Background Elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 blur-[120px] rounded-full animate-pulse delay-1000" />
-        <div className="absolute inset-0 opacity-[0.05]" 
-             style={{ backgroundImage: 'linear-gradient(#E0E0E0 1px, transparent 1px), linear-gradient(90deg, #E0E0E0 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full" />
+        <div className="absolute inset-0 opacity-[0.03]" 
+             style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       </div>
 
-      {/* Sidebar - Hardware Style */}
-      <aside className="w-72 border-r border-white/5 flex flex-col bg-[#020617]/80 backdrop-blur-xl z-20">
-        <div className="p-8 border-b border-white/5">
+      {/* Sidebar - Clean Minimal Style */}
+      <aside className="w-72 border-r border-slate-200 flex flex-col bg-slate-50/50 backdrop-blur-xl z-20">
+        <div className="p-8 border-b border-slate-200">
           <div className="flex items-center gap-3 mb-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-emerald-500/20 blur-md rounded-full animate-pulse" />
-              <div className="relative p-2 bg-[#1E293B] border border-white/10 rounded-lg">
-                <Radio className="w-5 h-5 text-emerald-400" />
+              <div className="absolute inset-0 bg-emerald-500/10 blur-md rounded-full" />
+              <div className="relative p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
+                <Radio className="w-5 h-5 text-emerald-600" />
               </div>
             </div>
             <div>
-              <h1 className="font-serif italic text-xl font-bold tracking-tight text-white">Autonomous Core</h1>
+              <h1 className="font-serif italic text-xl font-bold tracking-tight text-slate-900">Autonomous Core</h1>
               <div className="flex items-center gap-2">
-                <span className="text-[9px] uppercase tracking-[0.2em] text-emerald-400 font-mono">Quantum v4.0</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-emerald-600 font-mono font-bold">Quantum v5.0</span>
               </div>
             </div>
           </div>
           
           <div className="grid grid-cols-2 gap-2 mt-6">
-            <div className="p-2 bg-white/5 border border-white/5 rounded-md">
-              <p className="text-[8px] uppercase tracking-widest opacity-40 font-mono mb-1">System Time</p>
-              <p className="text-[10px] font-mono text-white">{currentTime.toLocaleTimeString([], { hour12: false })}</p>
+            <div className="p-2 bg-white border border-slate-200 rounded-md shadow-sm">
+              <p className="text-[8px] uppercase tracking-widest text-slate-400 font-mono mb-1">System Time</p>
+              <p className="text-[10px] font-mono text-slate-900">{currentTime.toLocaleTimeString([], { hour12: false })}</p>
             </div>
-            <div className="p-2 bg-white/5 border border-white/5 rounded-md">
-              <p className="text-[8px] uppercase tracking-widest opacity-40 font-mono mb-1">Status</p>
+            <div className="p-2 bg-white border border-slate-200 rounded-md shadow-sm">
+              <p className="text-[8px] uppercase tracking-widest text-slate-400 font-mono mb-1">Status</p>
               <div className="flex items-center gap-1.5">
-                <div className="w-1 h-1 rounded-full bg-emerald-400 animate-ping" />
-                <p className="text-[10px] font-mono text-emerald-400 uppercase">Active</p>
+                <div className="w-1 h-1 rounded-full bg-emerald-500 animate-ping" />
+                <p className="text-[10px] font-mono text-emerald-600 uppercase font-bold">Active</p>
               </div>
             </div>
           </div>
@@ -92,62 +92,62 @@ export default function App() {
               onClick={() => setActiveView(item.id as View)}
               className={`w-full flex items-center gap-4 px-4 py-3.5 text-sm transition-all duration-300 group relative rounded-lg overflow-hidden ${
                 activeView === item.id 
-                  ? 'text-white' 
-                  : 'text-white/40 hover:text-white/80 hover:bg-white/5'
+                  ? 'text-slate-900' 
+                  : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'
               }`}
             >
               {activeView === item.id && (
                 <motion.div 
                   layoutId="activeNav"
-                  className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-transparent border-l-2 border-emerald-500"
+                  className="absolute inset-0 bg-emerald-500/5 border-l-2 border-emerald-500"
                 />
               )}
-              <item.icon className={`w-5 h-5 transition-transform group-hover:scale-110 relative z-10 ${activeView === item.id ? 'text-emerald-400' : ''}`} />
+              <item.icon className={`w-5 h-5 transition-transform group-hover:scale-110 relative z-10 ${activeView === item.id ? 'text-emerald-600' : ''}`} />
               <span className="font-medium relative z-10 tracking-tight">{item.label}</span>
             </button>
           ))}
         </nav>
 
-        <div className="p-8 border-t border-white/5 space-y-6">
+        <div className="p-8 border-t border-slate-200 space-y-6">
           <div className="space-y-3">
-            <div className="flex justify-between text-[9px] font-mono uppercase tracking-widest opacity-40">
+            <div className="flex justify-between text-[9px] font-mono uppercase tracking-widest text-slate-400">
               <span>Neural Load</span>
-              <span>42%</span>
+              <span className="text-slate-900 font-bold">42%</span>
             </div>
-            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full bg-emerald-500 w-[42%] shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+            <div className="h-1 bg-slate-200 rounded-full overflow-hidden">
+              <div className="h-full bg-emerald-500 w-[42%]" />
             </div>
           </div>
           
-          <div className="flex items-center gap-3 opacity-40 hover:opacity-100 transition-opacity cursor-pointer group">
+          <div className="flex items-center gap-3 text-slate-400 hover:text-slate-900 transition-colors cursor-pointer group">
             <Settings className="w-4 h-4 group-hover:rotate-90 transition-transform" />
             <span className="text-[10px] font-mono uppercase tracking-wider">Core Protocols</span>
           </div>
         </div>
       </aside>
 
-      {/* Main Content - Atmospheric */}
-      <main className="flex-1 overflow-y-auto relative bg-[#0F172A]">
+      {/* Main Content - Clean & Airy */}
+      <main className="flex-1 overflow-y-auto relative bg-white">
         {/* Top Header Bar */}
-        <header className="sticky top-0 z-30 bg-[#0F172A]/80 backdrop-blur-md border-b border-white/5 px-12 py-6 flex justify-between items-center">
+        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200 px-12 py-6 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <div className="p-2.5 bg-emerald-500/10 rounded-xl border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
-              <Cpu className="w-6 h-6 text-emerald-400" />
+            <div className="p-2.5 bg-emerald-50 rounded-xl border border-emerald-100 shadow-sm">
+              <Cpu className="w-6 h-6 text-emerald-600" />
             </div>
             <div>
-              <h2 className="text-xl font-bold tracking-tight text-white">AIOps Autonomous Core <span className="text-emerald-400 ml-2 font-mono text-sm align-top">v4.0</span></h2>
-              <p className="text-[10px] text-white/40 uppercase tracking-[0.3em] font-medium">Neural Intelligence Command Center</p>
+              <h2 className="text-xl font-bold tracking-tight text-slate-900">AIOps Autonomous Core <span className="text-emerald-600 ml-2 font-mono text-sm align-top">v5.0</span></h2>
+              <p className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-medium">Neural Intelligence Command Center</p>
             </div>
           </div>
           <div className="flex items-center gap-8">
-            <div className="hidden md:flex items-center gap-3 px-4 py-2 bg-white/5 rounded-full border border-white/5">
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
-              <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest">System Stable</span>
+            <div className="hidden md:flex items-center gap-3 px-4 py-2 bg-slate-50 rounded-full border border-slate-200">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] font-mono text-emerald-600 uppercase tracking-widest font-bold">System Stable</span>
             </div>
-            <div className="h-8 w-px bg-white/10" />
+            <div className="h-8 w-px bg-slate-200" />
             <div className="text-right">
-              <p className="text-[9px] text-white/40 uppercase tracking-widest mb-0.5">Global Latency</p>
-              <p className="text-xs font-mono text-white">12ms <span className="text-emerald-400 text-[10px]">▼ 2%</span></p>
+              <p className="text-[9px] text-slate-400 uppercase tracking-widest mb-0.5">Global Latency</p>
+              <p className="text-xs font-mono text-slate-900 font-bold">12ms <span className="text-emerald-600 text-[10px]">▼ 2%</span></p>
             </div>
           </div>
         </header>

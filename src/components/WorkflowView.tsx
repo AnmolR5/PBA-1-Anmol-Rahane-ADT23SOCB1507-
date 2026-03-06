@@ -72,17 +72,17 @@ export default function WorkflowView() {
 
   return (
     <div className="space-y-12">
-      <header className="flex justify-between items-end border-b border-white/5 pb-8">
+      <header className="flex justify-between items-end border-b border-slate-200 pb-8">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <Workflow className="w-4 h-4 text-emerald-400" />
-            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-emerald-400">Autonomous Protocols v4.0</span>
+            <Workflow className="w-4 h-4 text-emerald-600" />
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-emerald-600 font-bold">Autonomous Protocols v5.0</span>
           </div>
-          <h2 className="text-5xl font-serif italic text-white">Autonomous Healing</h2>
+          <h2 className="text-5xl font-serif italic text-slate-900">Autonomous Healing</h2>
         </div>
         <div className="text-right">
-          <p className="text-[9px] font-mono uppercase tracking-widest opacity-40 mb-1">MTTR Target</p>
-          <p className="text-xl font-serif italic text-emerald-400">{'<'} 5.0m</p>
+          <p className="text-[9px] font-mono uppercase tracking-widest text-slate-400 mb-1">MTTR Target</p>
+          <p className="text-xl font-serif italic text-emerald-600">{'<'} 5.0m</p>
         </div>
       </header>
 
@@ -98,28 +98,28 @@ export default function WorkflowView() {
               onClick={() => setCurrentStep(idx)}
               className={`p-8 rounded-[32px] border transition-all cursor-pointer relative group overflow-hidden ${
                 currentStep === idx 
-                  ? 'border-emerald-500/50 bg-white/5 shadow-[0_0_30px_rgba(16,185,129,0.1)]' 
-                  : 'border-white/5 bg-[#121216] hover:border-white/20'
+                  ? 'border-emerald-200 bg-emerald-50 shadow-sm' 
+                  : 'border-slate-200 bg-white hover:border-emerald-200'
               }`}
             >
               <div className="flex items-center gap-6">
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                  currentStep === idx ? 'bg-emerald-500 text-[#0A0A0B]' : 'bg-white/5 text-white/30 group-hover:text-white'
+                  currentStep === idx ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-400 group-hover:text-slate-600'
                 }`}>
                   {React.createElement(step.icon, { className: "w-6 h-6" })}
                 </div>
                 <div>
-                  <h4 className={`font-serif italic text-xl text-white transition-opacity ${currentStep === idx ? 'opacity-100' : 'opacity-40'}`}>{step.title}</h4>
-                  <p className="text-[9px] font-mono uppercase tracking-[0.2em] opacity-30">Phase 0{idx + 1}</p>
+                  <h4 className={`font-serif italic text-xl text-slate-900 transition-opacity ${currentStep === idx ? 'opacity-100' : 'opacity-40'}`}>{step.title}</h4>
+                  <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-slate-400">Phase 0{idx + 1}</p>
                 </div>
               </div>
               {idx < STEPS.length - 1 && (
-                <div className="absolute -bottom-4 left-15 w-[1px] h-4 bg-white/10" />
+                <div className="absolute -bottom-4 left-15 w-[1px] h-4 bg-slate-200" />
               )}
               {currentStep === idx && (
                 <motion.div 
                   layoutId="activeStepIndicator"
-                  className="absolute top-8 right-8 w-2 h-2 rounded-full bg-emerald-500"
+                  className="absolute top-8 right-8 w-2 h-2 rounded-full bg-emerald-600"
                 />
               )}
             </motion.div>
@@ -134,72 +134,72 @@ export default function WorkflowView() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="bg-[#121216] border border-white/5 rounded-[40px] shadow-2xl h-full flex flex-col overflow-hidden relative"
+              className="bg-white border border-slate-200 rounded-[40px] shadow-sm h-full flex flex-col overflow-hidden relative"
             >
-              <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+              <div className="absolute top-0 right-0 p-12 opacity-[0.03] text-slate-900 pointer-events-none">
                 {React.createElement(STEPS[currentStep].icon, { className: "w-64 h-64" })}
               </div>
 
               <div className="p-16 flex-1 relative z-10">
                 <div className="flex items-center justify-between mb-16">
-                  <div className={`px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest border ${STEPS[currentStep].bg} ${STEPS[currentStep].color} border-current/20`}>
+                  <div className={`px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest border ${STEPS[currentStep].bg.replace('500/10', '50')} ${STEPS[currentStep].color.replace('400', '600')} border-current/20`}>
                     Active Protocol
                   </div>
-                  <div className="flex items-center gap-3 text-[10px] font-mono opacity-40 uppercase tracking-widest">
+                  <div className="flex items-center gap-3 text-[10px] font-mono text-slate-400 uppercase tracking-widest">
                     <Clock className="w-4 h-4" />
                     T + {currentStep * 60}s
                   </div>
                 </div>
 
-                <h3 className="text-6xl font-serif italic text-white mb-10">{STEPS[currentStep].title}</h3>
-                <p className="text-2xl leading-relaxed mb-12 opacity-60 max-w-2xl">{STEPS[currentStep].description}</p>
+                <h3 className="text-6xl font-serif italic text-slate-900 mb-10">{STEPS[currentStep].title}</h3>
+                <p className="text-2xl leading-relaxed mb-12 text-slate-500 max-w-2xl">{STEPS[currentStep].description}</p>
                 
-                <div className="bg-[#0A0A0B] border border-white/5 p-12 rounded-[32px] font-mono text-sm space-y-6 shadow-inner relative overflow-hidden">
+                <div className="bg-slate-900 border border-slate-800 p-12 rounded-[32px] font-mono text-sm space-y-6 shadow-inner relative overflow-hidden">
                   <div className="absolute inset-0 opacity-[0.02]" 
                        style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #fff 1px, transparent 0)', backgroundSize: '24px 24px' }} />
                   
-                  <div className="flex items-center gap-3 opacity-30 border-b border-white/5 pb-6 mb-2 relative z-10">
+                  <div className="flex items-center gap-3 text-slate-500 border-b border-slate-800 pb-6 mb-2 relative z-10">
                     <Terminal className="w-4 h-4" />
                     <span className="uppercase tracking-[0.3em] text-[10px]">Neural Telemetry Stream</span>
                   </div>
                   <div className="space-y-4 relative z-10">
                     <p className="text-emerald-400 flex gap-4">
-                      <span className="opacity-20">01:42:04</span>
+                      <span className="text-slate-600">01:42:04</span>
                       <span>{'>'} {STEPS[currentStep].details}</span>
                     </p>
-                    <p className="opacity-40 flex gap-4">
-                      <span className="opacity-20">01:42:05</span>
+                    <p className="text-slate-500 flex gap-4">
+                      <span className="text-slate-700">01:42:05</span>
                       <span>{'>'} Analyzing telemetry stream from us-central1-a...</span>
                     </p>
-                    <p className="opacity-40 flex gap-4">
-                      <span className="opacity-20">01:42:07</span>
+                    <p className="text-slate-500 flex gap-4">
+                      <span className="text-slate-700">01:42:07</span>
                       <span>{'>'} Correlation engine matched pattern with 'ConfigChange_v1'</span>
                     </p>
-                    <p className="opacity-40 flex gap-4">
-                      <span className="opacity-20">01:42:09</span>
+                    <p className="text-slate-500 flex gap-4">
+                      <span className="text-slate-700">01:42:09</span>
                       <span>{'>'} Initiating autonomous healing sequence...</span>
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="p-12 border-t border-white/5 bg-white/5 flex justify-between items-center relative z-10">
+              <div className="p-12 border-t border-slate-100 bg-slate-50 flex justify-between items-center relative z-10">
                 <button 
                   disabled={currentStep === 0}
                   onClick={() => setCurrentStep(prev => prev - 1)}
-                  className="flex items-center gap-3 px-8 py-4 font-bold text-[10px] uppercase tracking-widest disabled:opacity-20 hover:bg-white/5 rounded-2xl transition-all text-white/60 hover:text-white"
+                  className="flex items-center gap-3 px-8 py-4 font-bold text-[10px] uppercase tracking-widest disabled:opacity-20 hover:bg-slate-100 rounded-2xl transition-all text-slate-400 hover:text-slate-900"
                 >
                   <ChevronLeft className="w-4 h-4" /> Previous
                 </button>
                 <div className="flex gap-4">
                   {STEPS.map((_, i) => (
-                    <div key={i} className={`w-2 h-2 rounded-full transition-all ${i === currentStep ? 'bg-emerald-500 w-8' : 'bg-white/10'}`} />
+                    <div key={i} className={`w-2 h-2 rounded-full transition-all ${i === currentStep ? 'bg-emerald-600 w-8' : 'bg-slate-200'}`} />
                   ))}
                 </div>
                 <button 
                   disabled={currentStep === STEPS.length - 1}
                   onClick={() => setCurrentStep(prev => prev + 1)}
-                  className="flex items-center gap-3 px-10 py-4 bg-emerald-500 text-[#0A0A0B] font-bold text-[10px] uppercase tracking-widest hover:bg-emerald-400 disabled:opacity-20 rounded-2xl shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all"
+                  className="flex items-center gap-3 px-10 py-4 bg-emerald-600 text-white font-bold text-[10px] uppercase tracking-widest hover:bg-emerald-700 disabled:opacity-20 rounded-2xl shadow-md transition-all"
                 >
                   Next Phase <ChevronRight className="w-4 h-4" />
                 </button>
